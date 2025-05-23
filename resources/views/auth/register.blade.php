@@ -16,6 +16,31 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- Telefone -->
+        <div class="mt-4">
+            <x-input-label for="telefone" :value="__('Telefone')" />
+            <x-text-input id="telefone" class="block mt-1 w-full" type="text" name="telefone" :value="old('telefone')" required />
+            <x-input-error :messages="$errors->get('telefone')" class="mt-2" />
+        </div>
+
+        <!-- NIF -->
+        <div class="mt-4">
+            <x-input-label for="nif" :value="__('NIF')" />
+            <x-text-input id="nif" class="block mt-1 w-full" type="text" name="nif" :value="old('nif')" required />
+            <x-input-error :messages="$errors->get('nif')" class="mt-2" />
+        </div>
+
+
+        <!-- Morada -->
+        <div class="mt-4">
+            <x-input-label for="morada" :value="__('Morada')" />
+            <x-text-input id="morada" class="block mt-1 w-full" type="text" name="morada" :value="old('morada')" required />
+            <x-input-error :messages="$errors->get('morada')" class="mt-2" />
+        </div>
+
+
+
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
@@ -43,6 +68,7 @@
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
+
 
             <x-primary-button class="ms-4">
                 {{ __('Register') }}
