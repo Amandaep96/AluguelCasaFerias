@@ -15,15 +15,14 @@ class ReservationConfirmationMail extends Mailable
     use Queueable, SerializesModels;
 
     public string $client;
-    public string $local;
+
 
     /**
      * Create a new message instance.
      */
-    public function __construct(string $client, string $local)
+    public function __construct(string $client)
     {
         $this->client = $client;
-        $this->local = $local;
     }
 
     /**

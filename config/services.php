@@ -2,6 +2,7 @@
 
 return [
 
+
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -34,5 +35,11 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+
+    'google' => [
+        'recaptcha_secret_key' => env('GOOGLE_RECAPTCHA_SECRET_KEY'),
+        'recaptcha_site_key' => env('GOOGLE_RECAPTCHA_SITE_KEY'),
+    ],
+
 
 ];

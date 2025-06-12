@@ -1,37 +1,53 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+        <h2 class="font-semibold text-xl text-black-800 dark:text-black-200 leading-tight">
+            {{ __('Minhas Reservas') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
+        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-white-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6">
+                    @if($reservas->count() > 0)
+                        <div class="grid grid-cols-1 gap-4">
+                            @foreach($reservas as $reserva)
+                                <div class="border rounded-lg p-4 shadow hover:shadow-md transition-shadow">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="text-lg font-semibold">
+                                            {{ $reserva->bemLocavel->modelo }}
+                                        </h3>
+                                        <span class="px-2 py-1 text-sm rounded {{ $reserva->status === 'confirmado' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                            {{ ucfirst($reserva->status) }}
+                                        </span>
+                                    </div>
+
+                                    <div class="text-gray-600">
+                                        <p>Check-in: {{ \Carbon\Carbon::parse($reserva->data_inicio)->format('d/m/Y') }}</p>
+                                        <p>Check-out: {{ \Carbon\Carbon::parse($reserva->data_fim)->format('d/m/Y') }}</p>
+                                        <p class="font-semibold mt-2">Total: €{{ number_format($reserva->preco_total, 2, ',', '.') }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <!-- Paginação -->
+                        <div class="mt-6 bg-white">
+                            {{ $reservas->links() }}
+                        </div>
+                    @else
+                        <p class="text-dark-500 text-center">Você ainda não possui reservas.</p>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="max-w-sm mx-auto p-5">
-      @if (session('success'))
-         <div
-            class="alert alert-success shadow-lg rounded-lg py-4 px-6 font-semibold text-green-800 bg-green-100 ring-1 ring-green-300">
-            {{ session('success') }}
-         </div>
-      @endif
-
-      <form action="{{ route('send.email') }}" method="POST" class="mt-5 flex flex-col items-center space-y-2 p-2 border-2 border-gray-500 rounded-lg shadow-lg bg-gray-100">
-      @csrf
-         <label for="pickup" class="text-lg font-medium text-gray-700">Local de levantamento da reserva:</label>
-         <input type="text" id="pickup" name="pickup" required
-            class="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-         <button type="submit"
-            class="bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 text-white font-medium text-base md:text-lg rounded-full px-8 py-3 shadow-md hover:shadow-lg transition duration-300">
-            Enviar confirmação por e-mail
-         </button>
-      </form>
-   </div>
+    @if (session('success'))
+        <div class="max-w-sm mx-auto p-5">
+            <div class="alert alert-success shadow-lg rounded-lg py-4 px-6 font-semibold text-green-800 bg-green-100 ring-1 ring-green-300">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
 </x-app-layout>

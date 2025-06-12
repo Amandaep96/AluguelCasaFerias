@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_reservas', function (Blueprint $table) {
+        Schema::create('reservas', function (Blueprint $table) {
              $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('bem_locavel_id');
             $table->date('data_inicio');
             $table->date('data_fim');
             $table->decimal('preco_total', 10, 2)->nullable();
-            $table->enum('status', ['reservado', 'cancelado'])->default('reservado');
+            $table->enum('status', ['reservado', 'cancelado', 'pendente'])->default('reservado');
             $table->timestamps();
 
             // Definição da chave estrangeira para bem_locavel_id

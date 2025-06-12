@@ -1,6 +1,6 @@
 @props([
     'client' => 'Cliente',
-    'local' => 'Loja Central',
+    // 'local' => 'Loja Central',
 ])
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -59,7 +59,7 @@
 
       <p>Confirmamos com prazer a sua reserva.</p>
 
-      <p><strong>Retirada:</strong> {{ $local }}, a partir das 13h.</p>
+      {{-- <p><strong>Retirada:</strong> {{ $local }}, a partir das 13h.</p> --}}
 
       <p>Por favor, leve seus documentos de identificação para concluir a locação.</p>
 

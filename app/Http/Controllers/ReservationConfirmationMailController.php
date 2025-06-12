@@ -18,11 +18,11 @@ class ReservationConfirmationMailController extends Controller
         $email = $user->email;
 
         //pegar o que foi informado no campo do input
-        $local = $request->input('pickup');  // 'Loja Central';
+        //$local = $request->input('pickup');  // 'Loja Central';
 
         //enviar o email
         Mail::to($email)
-            ->send(new ReservationConfirmationMail($clientName, $local));
+            ->send(new ReservationConfirmationMail($clientName));
 
         //retorna a página anterior (back) com a mensagem
         return back()->with('success', 'E-mail enviado com sucesso!');
